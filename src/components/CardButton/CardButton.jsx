@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import './CardButton.css';
 
 function CardButton({ children }) {
