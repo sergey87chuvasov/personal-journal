@@ -1,8 +1,12 @@
 /* eslint-disable indent */
 import './App.css';
-import Button from './components/Button/Button';
 import CardButton from './components/CardButton/CardButton';
-import JournalItem from './components/JournalItem/JournalItem.Jsx';
+import JournalItem from './components/JournalItem/JournalItem';
+import Header from './components/Header/Header';
+import Body from './layouts/Body/Body';
+import JournalList from './components/JournalList/JournalList';
+import JournalAddButoon from './components/JournalAddButoon/JournalAddButoon';
+import LeftPanel from './layouts/LeftPanel/LeftPanel';
 
 function App() {
   const data = [
@@ -24,31 +28,36 @@ function App() {
   ];
 
   return (
-    <>
-      <h1>TITLE</h1>
-      <Button />
-      <CardButton>
-        <JournalItem
-          title={data[0].title}
-          text={data[0].text}
-          data={data[0].date}
-        />
-      </CardButton>
-      <CardButton>
-        <JournalItem
-          title={data[1].title}
-          text={data[1].text}
-          data={data[1].date}
-        />
-      </CardButton>
-      <CardButton>
-        <JournalItem
-          title={data[2].title}
-          text={data[2].text}
-          data={data[2].date}
-        />
-      </CardButton>
-    </>
+    <div className='app'>
+      <LeftPanel>
+        <Header />
+        <JournalAddButoon />
+        <JournalList>
+          <CardButton>
+            <JournalItem
+              title={data[0].title}
+              text={data[0].text}
+              data={data[0].date}
+            />
+          </CardButton>
+          <CardButton>
+            <JournalItem
+              title={data[1].title}
+              text={data[1].text}
+              data={data[1].date}
+            />
+          </CardButton>
+          <CardButton>
+            <JournalItem
+              title={data[2].title}
+              text={data[2].text}
+              data={data[2].date}
+            />
+          </CardButton>
+        </JournalList>
+      </LeftPanel>
+      <Body>BODY</Body>
+    </div>
   );
 }
 
