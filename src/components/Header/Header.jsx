@@ -1,7 +1,8 @@
+/* eslint-disable indent */
 import './Header.css';
 
 function Header() {
-  return <div className='header'>LOGO</div>;
+  return <div>LOGO</div>;
 }
 
 export default Header;
