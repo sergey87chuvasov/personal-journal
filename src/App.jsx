@@ -7,6 +7,7 @@ import Body from './layouts/Body/Body';
 import JournalList from './components/JournalList/JournalList';
 import JournalAddButoon from './components/JournalAddButoon/JournalAddButoon';
 import LeftPanel from './layouts/LeftPanel/LeftPanel';
+import JournalForm from './components/JournalForm/JournalForm';
 
 function App() {
   const data = [
@@ -56,7 +57,9 @@ function App() {
           </CardButton>
         </JournalList>
       </LeftPanel>
-      <Body>BODY</Body>
+      <Body>
+        <JournalForm />
+      </Body>
     </div>
   );
 }

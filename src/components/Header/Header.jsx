@@ -2,7 +2,7 @@
 import './Header.css';
 
 function Header() {
-  return <div>LOGO</div>;
+  return <img src='/logo.svg' alt='logo pic' />;
 }
 
 export default Header;

@@ -1,11 +1,10 @@
-import { useState } from 'react';
 /* eslint-disable indent */
 import './Button.css';
 
-function Button() {
+function Button({ text }) {
   return (
     <>
-      <button className='button accent'>Сохранить</button>
+      <button className='button accent'>{text}</button>
     </>
   );
 }
