@@ -12,18 +12,21 @@ import { useState } from 'react';
 
 const INITIAL_DATA = [
   {
+    id: 1,
     title: 'Подготовка к обновлению курсов',
     text: 'Горные походы открывают удивительные природные ландшафты!',
     date: new Date(),
   },
   {
+    id: 2,
     title: 'Разработка к обновлению тем',
     text: 'Никогда не говори никогда!',
     date: new Date(),
   },
   {
-    title: 'Привет, как дела?',
-    text: 'Я помню чудное мгновенье',
+    id: 3,
+    title: 'Список дел на Новый Год',
+    text: 'В разработке на пару страниц',
     date: new Date(),
   },
 ];
@@ -38,8 +41,18 @@ function App() {
         text: item.text,
         title: item.title,
         date: new Date(item.date),
+        id:
+          oldItems.length > 0 ? Math.max(...oldItems.map((i) => i.id)) + 1 : 1,
       },
     ]);
+  };
+
+  const sortItems = (a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
   };
 
   return (
@@ -48,11 +61,15 @@ function App() {
         <Header />
         <JournalAddButoon />
         <JournalList>
-          {items.map((el) => (
-            <CardButton>
-              <JournalItem title={el.title} text={el.text} data={el.date} />
-            </CardButton>
-          ))}
+          {items.lengt === 0 ? (
+            <p>Пока нет, добавть первую</p>
+          ) : (
+            items.sort(sortItems).map((el) => (
+              <CardButton key={el.id}>
+                <JournalItem title={el.title} text={el.text} data={el.date} />
+              </CardButton>
+            ))
+          )}
         </JournalList>
       </LeftPanel>
       <Body>
