@@ -1,8 +1,8 @@
 /* eslint-disable indent */
-import './Header.css';
+import styles from './Header.module.css';
 
 function Header() {
-  return <img src='/logo.svg' alt='logo pic' />;
+  return <img className={styles.logo} src='/logo.svg' alt='logo pic' />;
 }
 
 export default Header;

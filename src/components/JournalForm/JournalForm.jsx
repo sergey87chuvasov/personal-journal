@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { useState } from 'react';
 import Button from '../Button/Button';
-import './JournalForm.css';
+import styles from './JournalForm.module.css';
 
 function JournalForm({ onSubmit }) {
   const [formValidState, setFormValidState] = useState({
@@ -44,23 +44,34 @@ function JournalForm({ onSubmit }) {
   };
 
   return (
-    <form className='journal-form' onSubmit={addJournalItem}>
+    <form className={styles['journal-form']} onSubmit={addJournalItem}>
       <input
         type='text'
         name='title'
-        style={{ border: formValidState.title ? undefined : '1px solid red' }}
+        className={`${styles['input']} ${
+          formValidState.title ? '' : styles['invalid']
+        }`}
+        // style={{ border: formValidState.title ? undefined : '1px solid red' }}
       />
       <input
         type='date'
         name='date'
-        style={{ border: formValidState.date ? undefined : '1px solid red' }}
+        className={`${styles['input']} ${
+          formValidState.date ? '' : styles['invalid']
+        }`}
+        // className={`input ${formValidState.date ? '' : 'invalid'}`}
+        // style={{ border: formValidState.date ? undefined : '1px solid red' }}
       />
       <input type='text' name='tag' />
       <textarea
         name='post'
         cols='30'
         rows='10'
-        style={{ border: formValidState.post ? undefined : '1px solid red' }}
+        className={`${styles['input']} ${
+          formValidState.post ? '' : styles['invalid']
+        }`}
+        // className={`input ${formValidState.post ? '' : 'invalid'}`}
+        // style={{ border: formValidState.post ? undefined : '1px solid red' }}
       ></textarea>
       <Button text='Сохранить' />
     </form>
