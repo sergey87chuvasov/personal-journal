@@ -1,7 +1,5 @@
 /* eslint-disable indent */
 import './App.css';
-import CardButton from './components/CardButton/CardButton';
-import JournalItem from './components/JournalItem/JournalItem';
 import Header from './components/Header/Header';
 import Body from './layouts/Body/Body';
 import JournalList from './components/JournalList/JournalList';
