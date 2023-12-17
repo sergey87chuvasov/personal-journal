@@ -20,4 +20,12 @@ module.exports = {
     'react/prop-types': [0],
     indent: ['error', 'tab'],
   },
+  materials: [
+    {
+      DbgColor: 15658734,
+      DbgIndex: 0,
+      DbgName: 'dummy',
+      colorDiffuse: [1, 0, 0],
+    },
+  ],
 };
