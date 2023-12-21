@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import styles from './JournalForm.module.css';
 import cn from 'classnames';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
+import Input from '../Input/Input';
 
 function JournalForm({ onSubmit }) {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
@@ -63,15 +64,14 @@ function JournalForm({ onSubmit }) {
   return (
     <form className={styles['journal-form']} onSubmit={addJournalItem}>
       <div>
-        <input
+        <Input
           ref={titleRef}
+          isValid={isValid.title}
           onChange={onChange}
           value={values.title}
           type='text'
           name='title'
-          className={cn(styles['input-title'], {
-            [styles['invalid']]: !isValid.title,
-          })}
+          appearence='title'
         />
       </div>
 
@@ -80,16 +80,17 @@ function JournalForm({ onSubmit }) {
           <img src='./../../public/calendar.svg' alt='data pic' />
           <span>Дата</span>
         </label>
-        <input
+        <Input
           ref={dateRef}
           onChange={onChange}
+          isValid={isValid.date}
           value={values.date}
           id='date'
           type='date'
           name='date'
-          className={cn(styles['input'], {
-            [styles['invalid']]: !isValid.date,
-          })}
+          // className={cn(styles['input'], {
+          //   [styles['invalid']]: !isValid.date,
+          // })}
           // className={`${styles['input']} ${
           //   formValidState.date ? '' : styles['invalid']
           // }`}
@@ -103,13 +104,13 @@ function JournalForm({ onSubmit }) {
           <img src='./../../public/folder.svg' alt='folder pic' />
           <span>Метки</span>
         </label>
-        <input
+        <Input
           onChange={onChange}
           type='text'
           name='tag'
           value={values.tag}
           id='tag'
-          className={styles['input']}
+          // className={styles['input']}
         />
       </div>
 
