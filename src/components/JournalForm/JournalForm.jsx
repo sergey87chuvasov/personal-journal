@@ -1,10 +1,11 @@
 /* eslint-disable indent */
-import { useEffect, useReducer, useState, useRef } from 'react';
+import { useEffect, useReducer, useContext, useRef } from 'react';
 import Button from '../Button/Button';
 import styles from './JournalForm.module.css';
 import cn from 'classnames';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 import Input from '../Input/Input';
+import { UserContext } from '../../context/user.context';
 
 function JournalForm({ onSubmit }) {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
@@ -12,6 +13,8 @@ function JournalForm({ onSubmit }) {
   const titleRef = useRef();
   const dateRef = useRef();
   const postRef = useRef();
+
+  const { userId } = useContext(UserContext);
 
   const focusError = (isValid) => {
     switch (true) {
@@ -48,6 +51,13 @@ function JournalForm({ onSubmit }) {
       dispatchForm({ type: 'CLEAR' });
     }
   }, [isFormReadyToSubmit, values, onSubmit]);
+
+  useEffect(() => {
+    dispatchForm({
+      type: 'SET_VALUE',
+      payload: { userId },
+    });
+  }, [userId]);
 
   const onChange = (e) => {
     dispatchForm({
