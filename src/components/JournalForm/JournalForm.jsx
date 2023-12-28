@@ -120,7 +120,6 @@ function JournalForm({ onSubmit }) {
           name='tag'
           value={values.tag}
           id='tag'
-          // className={styles['input']}
         />
       </div>
 
