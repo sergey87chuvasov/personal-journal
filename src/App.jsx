@@ -1,13 +1,12 @@
-/* eslint-disable indent */
 import './App.css';
 import Header from './components/Header/Header';
-import Body from './layouts/Body/Body';
-import JournalList from './components/JournalList/JournalList';
-import JournalAddButoon from './components/JournalAddButoon/JournalAddButoon';
-import LeftPanel from './layouts/LeftPanel/LeftPanel';
+import JournalAddButton from './components/JournalAddButoon/JournalAddButoon';
 import JournalForm from './components/JournalForm/JournalForm';
+import JournalList from './components/JournalList/JournalList';
+import Body from './layouts/Body/Body';
+import LeftPanel from './layouts/LeftPanel/LeftPanel';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
-import { UserContextProvider } from './context/user.context';
+import { UserContextProvidev } from './context/user.context';
 import { useState } from 'react';
 
 function mapItems(items) {
@@ -22,7 +21,7 @@ function mapItems(items) {
 
 function App() {
   const [items, setItems] = useLocalStorage('data');
-  const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const addItem = (item) => {
     if (!item.id) {
@@ -31,7 +30,7 @@ function App() {
         {
           ...item,
           date: new Date(item.date),
-          id: items.length > 0 ? Math.max(...items.map((i) => i.id)) + 1 : 1,
+          id: item.length > 0 ? Math.max(...items.map((i) => i.id)) + 1 : 1,
         },
       ]);
     } else {
@@ -48,19 +47,27 @@ function App() {
     }
   };
 
+  const deleteItem = (id) => {
+    setItems([...items.filter((i) => i.id !== id)]);
+  };
+
   return (
-    <UserContextProvider>
+    <UserContextProvidev>
       <div className='app'>
         <LeftPanel>
           <Header />
-          <JournalAddButoon />
+          <JournalAddButton clearForm={() => setSelectedItem(null)} />
           <JournalList items={mapItems(items)} setItem={setSelectedItem} />
         </LeftPanel>
         <Body>
-          <JournalForm onSubmit={addItem} data={selectedItem} />
+          <JournalForm
+            onSubmit={addItem}
+            onDelete={deleteItem}
+            data={selectedItem}
+          />
         </Body>
       </div>
-    </UserContextProvider>
+    </UserContextProvidev>
   );
 }
 

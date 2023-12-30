@@ -1,14 +1,13 @@
-/* eslint-disable indent */
 import './Button.css';
+import { memo } from 'react';
 
 function Button({ children, onClick }) {
+  console.log('Button');
   return (
-    <>
-      <button className='button accent' onClick={onClick}>
-        {children}
-      </button>
-    </>
+    <button className='button accent' onClick={onClick}>
+      {children}
+    </button>
   );
 }
 
-export default Button;
+export default memo(Button);
