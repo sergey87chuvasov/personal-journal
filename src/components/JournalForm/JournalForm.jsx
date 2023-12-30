@@ -7,7 +7,7 @@ import { INITIAL_STATE, formReducer } from './JournalForm.state';
 import Input from '../Input/Input';
 import { UserContext } from '../../context/user.context';
 
-function JournalForm({ onSubmit }) {
+function JournalForm({ onSubmit, data }) {
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
   const { isValid, isFormReadyToSubmit, values } = formState;
   const titleRef = useRef();
@@ -31,6 +31,10 @@ function JournalForm({ onSubmit }) {
   };
 
   useEffect(() => {
+    dispatchForm({ type: 'SET_VALUE', payload: { ...data } });
+  }, [data]);
+
+  useEffect(() => {
     let timerId;
 
     if (!isValid.date || !isValid.post || !isValid.title) {
@@ -49,8 +53,9 @@ function JournalForm({ onSubmit }) {
     if (isFormReadyToSubmit) {
       onSubmit(values);
       dispatchForm({ type: 'CLEAR' });
+      dispatchForm({ type: 'SET_VALUE', payload: { userId } });
     }
-  }, [isFormReadyToSubmit, values, onSubmit]);
+  }, [isFormReadyToSubmit, values, onSubmit, userId]);
 
   useEffect(() => {
     dispatchForm({
@@ -94,7 +99,9 @@ function JournalForm({ onSubmit }) {
           ref={dateRef}
           onChange={onChange}
           isValid={isValid.date}
-          value={values.date}
+          value={
+            values.date ? new Date(values.date).toISOString().slice(0, 10) : ''
+          }
           id='date'
           type='date'
           name='date'

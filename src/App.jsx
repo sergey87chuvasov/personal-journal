@@ -8,6 +8,7 @@ import LeftPanel from './layouts/LeftPanel/LeftPanel';
 import JournalForm from './components/JournalForm/JournalForm';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
 import { UserContextProvider } from './context/user.context';
+import { useState } from 'react';
 
 function mapItems(items) {
   if (!items) {
@@ -21,6 +22,7 @@ function mapItems(items) {
 
 function App() {
   const [items, setItems] = useLocalStorage('data');
+  const [selectedItem, setSelectedItem] = useState({});
 
   const addItem = (item) => {
     if (!item.id) {
@@ -52,10 +54,10 @@ function App() {
         <LeftPanel>
           <Header />
           <JournalAddButoon />
-          <JournalList items={mapItems(items)} />
+          <JournalList items={mapItems(items)} setItem={setSelectedItem} />
         </LeftPanel>
         <Body>
-          <JournalForm onSubmit={addItem} />
+          <JournalForm onSubmit={addItem} data={selectedItem} />
         </Body>
       </div>
     </UserContextProvider>
